@@ -1,0 +1,45 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+
+	<h1>Welcome to KrakenAlarm</h1>
+
+	<div id="clock"></div>
+</div><!-- /.jumbotron -->
+
+<div class="body-content">
+	<div class="row">
+		<div class="col-lg-4">
+			<h2>Hacker News</h2>
+			<p>The top Hacker News feed from Twitter.</p>
+			<a class="twitter-timeline" href="https://twitter.com/newsycombinator" data-widget-id="416728136743538688">Tweets by @newsycombinator</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		</div>
+		<div class="col-lg-4">
+			<h2>Recent Wake Up Grades</h2>
+			<p>Ever wonder how long it takes you to get up? Here is a list of last 10 grades.</p>
+			<div class="widget" id="recent-grades">
+				<ul>
+					<li><span class="grade">B</a>: It took you 5 minutes to wake up.</li>
+					<li><span class="grade">C</a>: It took you 10 minutes to wake up.</li>
+					<li><span class="grade">A</a>: It took you 1 minutes to wake up.</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<h2>Weather</h2>
+			<a href="http://www.accuweather.com/en/us/grass-valley-ca/95945/weather-forecast/332138" class="aw-widget-legal">
+<!--
+By accessing and/or using this code snippet, you agree to AccuWeather’s terms and conditions (in English) which can be found at http://www.accuweather.com/en/free-weather-widgets/terms and AccuWeather’s Privacy Statement (in English) which can be found at http://www.accuweather.com/en/privacy.
+-->
+</a><div id="awcc1388192805491" class="aw-widget-current"  data-locationkey="332138" data-unit="f" data-language="en-us" data-useip="false" data-uid="awcc1388192805491"></div><script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
+<a href="http://www.accuweather.com/en/us/grass-valley-ca/95945/weather-forecast/332138" class="aw-widget-legal">
+<!--
+By accessing and/or using this code snippet, you agree to AccuWeather’s terms and conditions (in English) which can be found at http://www.accuweather.com/en/free-weather-widgets/terms and AccuWeather’s Privacy Statement (in English) which can be found at http://www.accuweather.com/en/privacy.
+-->
+</a><div id="awtd1388192805491" class="aw-widget-36hour"  data-locationkey="332138" data-unit="f" data-language="en-us" data-useip="false" data-uid="awtd1388192805491" data-editlocation="false"></div><script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
+		</div>
+	</div><!-- /.row -->
+{% endblock %}
