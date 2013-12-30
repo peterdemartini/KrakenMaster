@@ -3,12 +3,25 @@
 {% block content %}
 <div class="container-narrow">
   <h1>Register</h1>
+	<p>Register here to create an account! You must have the correct access to code to register.</p>
     <br/>
-    <form id="registerForm" class="form form-register" method="POST" action="" role="form">
+    <form id="registerteform" class="form form-register" method="POST" action="" role="form">
             {{ form.hidden_tag() }}
+	    <div class="form-group">
+                {{form.access_code.label}}
+                {{form.access_code(placeholder="Access Code", class_="form-control")}}
+            </div>
             <div class="form-group">
                 {{form.username.label}}
                 {{form.username(placeholder="Username", class_="form-control")}}
+            </div>
+	    <div class="form-group">
+                {{form.first_name.label}}
+                {{form.first_name(placeholder="First Name", class_="form-control")}}
+            </div>
+	    <div class="form-group">
+                {{form.last_name.label}}
+                {{form.last_name(placeholder="Last Name", class_="form-control")}}
             </div>
             <div class="form-group">
                 {{form.email.label}}

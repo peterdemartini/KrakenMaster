@@ -1,28 +1,28 @@
 /* =============================================================================
-   App specific CSS file.
-   ========================================================================== */
+App specific CSS file.
+========================================================================== */
 
 /* universal */
 
 html {
-  overflow-y: scroll;
+	overflow-y: scroll;
 }
 
 body {
-  padding-top: 60px;
+	padding-top: 60px;
 }
 
 section {
-  overflow: auto;
+	overflow: auto;
 }
 
 textarea {
-  resize: vertical;
+	resize: vertical;
 }
 
 .container-narrow{
-  margin: 0 auto;
-  max-width: 700px;
+	margin: 0 auto;
+	max-width: 700px;
 }
 
 /**
@@ -33,62 +33,124 @@ textarea {
 
 }
 
+#clock .snooze, #clock .stop {
+	font-size: 0.5em;
+}
+
+div.listbox {
+	width: 750px;
+}
+
+.listbox h2 {
+	font: 400 40px/1.5 Helvetica, Verdana, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+.listbox ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.listbox li {
+	font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+	border-bottom: 1px solid #ccc;
+	background-color: rgba(0,0,0,0.05);
+	padding: 10px;
+}
+
+.listbox li:last-child {
+	border: none;
+}
+
+.listbox li a {
+	text-decoration: none;
+	color: #000;
+	display: block;
+	width: 200px;
+	-webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+	-moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+	-o-transition: font-size 0.3s ease, background-color 0.3s ease;
+	-ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+	transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+
+.listbox li a:hover {
+	font-size: 30px;
+	background: #f6f6f6;
+}
+
+.listbox strong {
+}
+
+.grade .letter {
+	font-size: 25px;
+	color: green;
+	padding: 5px;
+	border: 2px solid #ccc;
+	width: 50px;
+	text-align: center;
+	display: inline-block;
+	background-color: white;
+}
+
 /* Forms */
 
 .navbar-form input[type="text"],
 .navbar-form input[type="password"] {
-  width: 180px;
+	width: 180px;
 }
 
 
 .form-register {
-  width: 50%;
+	width: 50%;
 }
 
 .form-register .form-control {
-  position: relative;
-  font-size: 16px;
-  height: auto;
-  padding: 10px;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+	position: relative;
+	font-size: 16px;
+	height: auto;
+	padding: 10px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 /* footer */
 
 footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #999999;
+	margin-top: 45px;
+	padding-top: 5px;
+	border-top: 1px solid #eaeaea;
+	color: #999999;
 }
 
 footer a {
-  color: #999999;
+	color: #999999;
 }
 
 footer p {
-  float: right;
-  margin-right: 25px;
+	float: right;
+	margin-right: 25px;
 }
 
 footer ul {
-  list-style: none;
+	list-style: none;
 }
 
 footer ul li {
-  float: left;
-  margin-left: 10px;
+	float: left;
+	margin-left: 10px;
 }
 
 footer .company {
-  float: left;
-  margin-left: 25px;
+	float: left;
+	margin-left: 25px;
 }
 
 footer .footer-nav {
-  float: right;
-  margin-right: 25px;
-  list-style: none;
+	float: right;
+	margin-right: 25px;
+	list-style: none;
 }

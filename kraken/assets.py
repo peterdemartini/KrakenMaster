@@ -12,6 +12,7 @@ js = Bundle(
     "libs/jquery2/jquery-2.0.3.min.js",
     "libs/bootstrap3/js/bootstrap.min.js",
     "js/flowtype.js",
+    "js/jquery.krakenclock.js",
     "js/plugins.js",
     Bundle(
         "js/script.js",

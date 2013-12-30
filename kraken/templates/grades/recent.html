@@ -1,0 +1,13 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<h1>{{ current_user.first_name }},</h1>
+<h3>Here are your recent grades.</h3>
+<div class="grades listbox">
+	<ul>
+	{% for grade in grades %}
+	<li class="grade"><strong class="letter">{{ grade.grade }}</strong> {{ grade.motivation }} <strong>{{ grade.minutes }}</strong></li>
+	{% endfor %}
+	</ul>
+</div>
+{% endblock %}

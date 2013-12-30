@@ -8,6 +8,7 @@ from kraken.extensions import login_manager
 from kraken.user.models import User
 from kraken.public.forms import LoginForm
 from kraken.user.forms import RegisterForm
+from kraken.grade.models import Grade
 from kraken.utils import flash_errors
 from kraken.database import db
 
@@ -30,7 +31,8 @@ def home():
             return redirect(redirect_url)
         else:
             flash_errors(form)
-    return render_template("public/home.html", form=form)
+    grades = Grade.get_recent(100, Grade.created_at);
+    return render_template("public/home.html", form=form, grades = grades)
 
 @blueprint.route('/logout/')
 @login_required

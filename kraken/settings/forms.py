@@ -4,8 +4,8 @@ from wtforms.validators import DataRequired, Email, EqualTo, Length, AnyOf
 
 from .models import User
 
-class RegisterForm(Form):
-    access_code = TextField('Access Code',
+class AllSettings(Form):
+    alarm = TextField('Access Code',
                     validators=[DataRequired(), AnyOf(['BaconAndWaffles'], message='You must have the correct Access Code')])
     username = TextField('Username',
                     validators=[DataRequired(), Length(min=3, max=25)])

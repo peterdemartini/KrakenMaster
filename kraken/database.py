@@ -23,6 +23,15 @@ class CRUDMixin(object):
         return None
 
     @classmethod
+    def get_recent(cls, limit, order_by):
+        if limit > 0 and order_by:    
+	    return cls.query.order_by(order_by).limit(limit).all();
+        return None
+
+    def get_all(cls):
+	return cls.query.all();
+
+    @classmethod
     def create(cls, **kwargs):
         '''Create a new record and save it the database.'''
         instance = cls(**kwargs)
