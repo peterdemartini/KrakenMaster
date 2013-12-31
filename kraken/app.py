@@ -7,7 +7,7 @@ from kraken.settings import ProdConfig
 from kraken.assets import assets
 from kraken.extensions import (db, login_manager, migrate,
                                                     cache)
-from kraken import public, user, grade
+from kraken import public, user, grade, alarm_settings
 
 
 def create_app(config_object=ProdConfig):
@@ -38,7 +38,7 @@ def register_blueprints(app):
     app.register_blueprint(public.views.blueprint)
     app.register_blueprint(user.views.blueprint)
     app.register_blueprint(grade.views.blueprint)
-    app.register_blueprint(settings.views.blueprint)
+    app.register_blueprint(alarm_settings.views.blueprint)
     return None
 
 

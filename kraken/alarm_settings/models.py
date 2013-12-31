@@ -7,7 +7,7 @@ from kraken.database import db, CRUDMixin
 from kraken.extensions import bcrypt
 
 
-class Setting(CRUDMixin,  db.Model):
+class AlarmSetting(CRUDMixin,  db.Model):
 
     __tablename__ = 'users'
     name = db.Column(db.String(80), unique=True, nullable=False)
