@@ -10,6 +10,19 @@ function init(){
 			console.log(data);
 			$.post('/grades/create/', data)
 			.success(function(res){
+				$('#clock').prepend('<div class="grade-res">' + res + "</div>");
+				setTimeout(function(){
+					$('#clock .grade-res').remove();
+				}, 100000);
+			})
+			.error(function(err){
+				console.log(err);
+			});
+		},
+		alarmStarted : function(){
+			return false; //TODO
+			$.post('/grades/create/', data)
+			.success(function(res){
 				$('#clock').append(res);
 			})
 			.error(function(err){

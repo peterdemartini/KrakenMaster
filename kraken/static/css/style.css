@@ -37,6 +37,11 @@ textarea {
 	font-size: 0.5em;
 }
 
+.grade-res {
+	font-size: 0.3em;
+	color: green;
+}
+
 div.listbox {
 	width: 750px;
 }

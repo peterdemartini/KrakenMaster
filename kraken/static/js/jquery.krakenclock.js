@@ -7,7 +7,7 @@
 			snooze: true,
 			snooze_text : "SNOOZE",
 			snooze_class : '',
-			snooze_delay : 1, // In Minutes TODO - make better
+			snooze_delay : 4, // In Minutes TODO - make better
 			time_class : '',
 			alarm_time : '06:00', // In Hours:Minutes
 			audio_src : '/static/audio/alarm.mp3',
@@ -15,6 +15,8 @@
 				fontRatio : 6
 			},
 			alarmStopped : function(data){
+			},
+			alarmStarted : function(){
 			},
 		}
 
@@ -35,6 +37,7 @@
 		clock.start_time = false;
 		clock.end_time = false;
 		clock.snooze_count = 0;
+		clock.snooze_time = 10;
 
 		var init = function() {
 			clock.settings = $.extend({}, defaults, options);
@@ -42,6 +45,8 @@
 			clock.real_alarm_time = clock.settings.alarm_time;
 			
 			clock.start_time = Math.round( new Date().getTime() / 1000 );
+
+			clock.snooze_time = clock.settings.snooze_delay;
 
 			initClock();
 		}
@@ -109,7 +114,7 @@
 				);
 				
 				loadAudio();
-				//startAlarm(); // This is for testing
+				startAlarm(); // This is for testing
 				clock.intervals.alarm = setInterval(setAlarm, 1000);
 
 				clock.find('.snooze').unbind('click');
@@ -153,7 +158,7 @@
 			clock.snooze_count++;
 			var a = clock.real_alarm_time.split(':');
 			var hrs = clock.date.getHours();
-			var new_min = (parseInt(clock.date.getMinutes()) + parseInt(clock.settings.snooze_delay));
+			var new_min = (parseInt(clock.date.getMinutes()) + parseInt(clock.settings.snooze_time));
 			if(new_min > 60){
 				remain = new_min % 60;
 				hrs = hrs + ((new_min - remain) / 60);
@@ -164,7 +169,7 @@
 			hrs = ( hrs < 10 ? "0" : "" ) + hrs;
 
 			clock.real_alarm_time = hrs  + ':' + new_min;
-			console.log(clock.real_alarm_time);
+			if(clock.snooze_time > 3) clock.snooze_time--;
 		}
 
 		var setAlarm = function(){
@@ -194,6 +199,7 @@
 
 			clock.find('.snooze').fadeIn('fast');
 			clock.find('.stop').fadeIn('fast');
+			clock.settings.alarmStarted();
 		}
 
 		var stopAlarm = function(){
