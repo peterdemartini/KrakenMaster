@@ -114,7 +114,7 @@
 				);
 				
 				loadAudio();
-				startAlarm(); // This is for testing
+				//startAlarm(); // This is for testing
 				clock.intervals.alarm = setInterval(setAlarm, 1000);
 
 				clock.find('.snooze').unbind('click');
