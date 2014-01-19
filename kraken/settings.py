@@ -16,11 +16,18 @@ class ProdConfig(Config):
     '''Production configuration.'''
     ENV = 'prod'
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/example'
+    SQLALCHEMY_DATABASE_URI = 'mysql+mysqldb://kraken:superp@55@localhost/kraken'
     DEBUG_TB_ENABLED = False  # Disable Debug toolbar
 
-
 class DevConfig(Config):
+    '''Development configuration.'''
+    ENV = 'dev'
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'mysql+mysqldb://kraken:superp@55@localhost/kraken'
+    ASSETS_DEBUG = True  # Don't bundle/minify static assets
+    CACHE_TYPE = "simple"  # Can be "memcached", "redis", etc.
+
+class DevConfig2(Config):
     '''Development configuration.'''
     ENV = 'dev'
     DEBUG = True
