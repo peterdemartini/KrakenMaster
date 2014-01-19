@@ -12,7 +12,7 @@ class User(UserMixin, CRUDMixin,  db.Model):
     __tablename__ = 'users'
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String, nullable=False)  # The hashed password
+    password = db.Column(db.String(100), nullable=False)  # The hashed password
     created_at = db.Column(db.DateTime(), nullable=False)
     first_name = db.Column(db.String(30), nullable=True)
     last_name = db.Column(db.String(30), nullable=True)
