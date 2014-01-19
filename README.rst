@@ -1,5 +1,5 @@
 ===============================
-KrakenAlarm
+KrakenServer
 ===============================
 
 The worlds most awesome pi alarm clock
