@@ -12,7 +12,7 @@ from kraken.grade.models import Grade
 from kraken.utils import flash_errors
 from kraken.database import db
 
-from kraken.lib.Skynet import Skynet
+from kraken.helpers.Skynet import Skynet
 
 blueprint = Blueprint('public', __name__, static_folder="../static")
 
