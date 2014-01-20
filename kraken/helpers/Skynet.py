@@ -2,6 +2,7 @@
 
 import time
 from kraken.helpers.cURL import cURL
+import sys
 from kraken.all_settings.models import AlarmSetting
 from kraken.database import db
 
@@ -32,7 +33,7 @@ class Skynet(object):
             if 'errors' in data:
                 if self.debug:
                     print("Error Response %s " % data)
-                print("Error for skynet request %s" % data['message'])
+                print("Error for skynet request %s" % data['errors'])
             else:
                 return True
         return False

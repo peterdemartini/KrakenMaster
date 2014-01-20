@@ -14,6 +14,11 @@ class AllSettings(Form):
     # Alarm Minutes
     alarm_minutes = SelectField('Alarm Minutes', default='00', choices=[],
                     validators=[DataRequired()])
+    # Snooze Minutes
+    snooze_minutes = SelectField('Snooze Minutes', default='10', choices=[],
+                    validators=[DataRequired()])
+
+    alarm_text = TextField('Alarm Text', default='ALARM!',validators=[Length(min=1, max=6)])
 
     def __init__(self, *args, **kwargs):
         super(AllSettings, self).__init__(*args, **kwargs)
