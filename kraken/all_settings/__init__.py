@@ -1,3 +1,3 @@
-'''The user module.'''
+'''The settings module.'''
 
 import views

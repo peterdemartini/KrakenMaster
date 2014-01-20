@@ -4,7 +4,7 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
 
-	<h1>Welcome to KrakenServer</h1>
+	<h1>Welcome to KrakenMaster</h1>
 
 	<div id="clock"></div>
 </div><!-- /.jumbotron -->
@@ -16,9 +16,21 @@
 			<p>The top Hacker News feed from Twitter.</p>
 			<a class="twitter-timeline" href="https://twitter.com/newsycombinator" data-widget-id="416728136743538688">Tweets by @newsycombinator</a>
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            <h2>Messages</h2>
+			{% if current_user and current_user.is_authenticated() %}
+			<p>Messages</p>
+			<div class="messages listbox" style="width: 350px;">
+				<ul>
+					{% for message in messages %}
+					<li class="message">{{ message }}</li>
+					{% endfor %}
+				</ul>
+			</div>
+            {% endif %}
 		</div>
 		<div class="col-lg-4">
 			<h2>Recent Wake Up Grades</h2>
+			{% if current_user and current_user.is_authenticated() %}
 			<p>Ever wonder how long it takes you to get up? Here is a list of last 10 grades.</p>
 			<div class="grades listbox" style="width: 350px;">
 				<ul>
@@ -27,6 +39,7 @@
 					{% endfor %}
 				</ul>
 			</div>
+            {% endif %}
 		</div>
 		<div class="col-lg-4">
 			<h2>Weather</h2>

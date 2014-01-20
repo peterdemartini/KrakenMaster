@@ -8,6 +8,8 @@ from kraken.all_settings.forms import AllSettings
 from kraken.all_settings.models import AlarmSetting
 from kraken.utils import flash_errors
 from kraken.database import db
+import json
+#from kraken.lib.Skynet import Skynet
 
 blueprint = Blueprint("setting", __name__, url_prefix='/settings',
                         static_folder="../static")
@@ -16,29 +18,22 @@ blueprint = Blueprint("setting", __name__, url_prefix='/settings',
 @blueprint.route("/", methods=['GET', 'POST'])
 @login_required
 def all():
-    a = AlarmSetting()
-    alarm_status = a.get_pair('alarm_status')
-    if alarm_status:
-        status_val=alarm_status.value
-    else:
-        status_val=1
+    fields = [{'field': 'alarm_status', 'label' : 'Alarm Status', 'default' : 1},
+                {'field': 'alarm_minutes', 'label' : 'Alarm Minutes', 'default' : 0},
+                {'field': 'alarm_hours', 'label' : 'Alarm Hours', 'default' : 6}]
+    settings = []
+    default = {} 
+    for field in fields:
+        setting = field
+        setting['model'] = AlarmSetting()
+        setting['data'] = setting['model'].get_pair(setting['field'])
+        if setting['data']:
+            setting['default'] = setting['data'].value
+        default[setting['field']] = setting['default']
+        settings.append(setting)
 
-    b = AlarmSetting()
-    alarm_hours = b.get_pair('alarm_hours')
-    if alarm_hours:
-        alarm_hrs=alarm_hours.value
-    else:
-        alarm_hrs=6
-
-    c = AlarmSetting()
-    alarm_minutes = c.get_pair('alarm_minutes')
-    if alarm_minutes:
-        alarm_mins=alarm_minutes.value
-    else:
-        alarm_mins=0
-
-    form = AllSettings(request.form, alarm_status=status_val, alarm_hours=alarm_hrs,
-                            alarm_minutes=alarm_mins, csrf_enabled=False)
+    form = AllSettings(request.form, alarm_status=default['alarm_status'], alarm_hours=default['alarm_hours'],
+                            alarm_minutes=default['alarm_minutes'], csrf_enabled=False)
 
     form.alarm_hours.choices=range(0,24)
     for v in form.alarm_hours.choices:
@@ -49,29 +44,37 @@ def all():
         form.alarm_minutes.choices[v] = (str(v), str(v))
     
     if form.validate_on_submit():
-        if not alarm_status:
-            alarm_status = a.create(name='alarm_status',
-                            label='Alarm Status',
-                            value=form.alarm_status.data)
-        else:
-            alarm_status = alarm_status.update(value=form.alarm_status.data)
+        for setting in settings:
+            if not setting['data']:
+                setting['data'] = setting['model'].create(name=setting['field'],
+                                    label=setting['label'],
+                                    value=form[setting['field']].data)
+            else:
+                setting['data'] = setting['data'].update(value=form[setting['field']].data)
 
-        if not alarm_hours:
-            alarm_hours = b.create(name='alarm_hours',
-                            label='Alarm Hours',
-                            value=form.alarm_hours.data)
-        else:
-            alarm_hours = alarm_hours.update(value=form.alarm_hours.data)
-
-        if not alarm_minutes:
-            alarm_minutes = c.create(name='alarm_minutes',
-                            label='Alarm Minutes',
-                            value=form.alarm_minutes.data)
-        else:
-                    alarm_minutes = alarm_minutes.update(value=form.alarm_minutes.data)
-
+        #skynet = Skynet()
+        #devices = skynet.search_devices({'name' : 'KrakenAlarm'});
+        #if devices:
+        #    skynet.send_message(devices, { 'request' : 'update_settings' })
         flash("Settings Saved!", 'success')
         return redirect(url_for('setting.all'))
     else:
         flash_errors(form)
     return render_template("settings/all.html", form=form)
+
+@blueprint.route("/api/retrieve", methods=['GET'])
+def get():
+    fields = [{'field': 'alarm_status', 'label' : 'Alarm Status', 'value' : 1},
+                {'field': 'alarm_minutes', 'label' : 'Alarm Minutes', 'value' : 0},
+                {'field': 'alarm_hours', 'label' : 'Alarm Hours', 'value' : 6}]
+    settings = {}
+    for field in fields:
+        model = AlarmSetting()
+        data = model.get_pair(field['field'])
+        value = field['value']
+        if data:
+            value = data.value
+        settings[field['field']] = value 
+
+    return json.dumps(settings)
+   

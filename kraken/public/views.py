@@ -12,6 +12,8 @@ from kraken.grade.models import Grade
 from kraken.utils import flash_errors
 from kraken.database import db
 
+from kraken.lib.Skynet import Skynet
+
 blueprint = Blueprint('public', __name__, static_folder="../static")
 
 @login_manager.user_loader
@@ -21,6 +23,14 @@ def load_user(id):
 
 @blueprint.route("/", methods=["GET", "POST"])
 def home():
+    skynet = Skynet()
+    messages = []
+    data = skynet.get_my_events()
+    if data and 'events' in data:
+        for event in data['events']:
+            if event and 'message' in event:
+                print("MESSAGE :: %s " % event['message'])
+                messages.append(event['message'])
     form = LoginForm(request.form)
     # Handle logging in
     if request.method == 'POST':
@@ -32,7 +42,7 @@ def home():
         else:
             flash_errors(form)
     grades = Grade.get_recent(100, Grade.created_at);
-    return render_template("public/home.html", form=form, grades = grades)
+    return render_template("public/home.html", form=form, grades = grades, messages=messages)
 
 @blueprint.route('/logout/')
 @login_required
