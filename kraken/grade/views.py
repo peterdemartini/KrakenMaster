@@ -13,7 +13,7 @@ blueprint = Blueprint("grade", __name__, url_prefix='/grades',
 @blueprint.route("/recent/")
 @login_required
 def recent():
-	grades = Grade.get_recent(100, Grade.created_at);
+	grades = Grade.get_recent(100, "created_at DESC");
 	return render_template("grades/recent.html", grades = grades)
 @blueprint.route("/create/", methods=['POST'])
 @login_required
