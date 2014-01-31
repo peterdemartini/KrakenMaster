@@ -22,7 +22,7 @@ def create():
 		end=int(request.form['end']),
 		snoozes=int(request.form['snooze_count']))
 	return render_template("grades/result.html", grade=newGrade)
-@blueprint.route("/api/create", methods=['G'])
+@blueprint.route("/api/create", methods=['GET'])
 def api_create():
     print("Request :: %s" % request.args )
     if request.args and 'start' in request.args and 'end' in request.args and 'snooze_count' in request.args:
