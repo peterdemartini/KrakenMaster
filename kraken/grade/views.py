@@ -22,15 +22,13 @@ def create():
 		end=int(request.form['end']),
 		snoozes=int(request.form['snooze_count']))
 	return render_template("grades/result.html", grade=newGrade)
-@blueprint.route("/api/create", methods=['POST'])
+@blueprint.route("/api/create", methods=['G'])
 def api_create():
-    print("Request :: %s" % request.data )
-    data = json.loads(request.data)
-    print(data)
-    if data and 'start' in data and 'end' in data and 'snooze_count' in data:
-        newGrade = Grade.create(start=int(data['start']),
-		    end=int(data['end']),
-            snoozes=int(data['snooze_count']))
+    print("Request :: %s" % request.args )
+    if request.args and 'start' in request.args and 'end' in request.args and 'snooze_count' in request.args:
+        newGrade = Grade.create(start=int(request.args['start']),
+		    end=int(request.args['end']),
+            snoozes=int(request.args['snooze_count']))
     else:
         return json.dumps({'success' : False, 'error' : 'Invalid Request'})
     return json.dumps({'success' : True})
