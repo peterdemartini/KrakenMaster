@@ -43,7 +43,16 @@ class Grade(CRUDMixin,  db.Model):
     def minutes(self):
 	    msg = str( ( self.total_time / 60 ) ) + ' Minutes'
 	    return msg
+	    
+    @property
+    def seconds(self): 
+	    msg = str( ( self.total_time % 60 ) ) + ' Seconds'
+	    return msg
 
+    @property
+    def grade_date(self):
+        return self.created_at.strftime('%m/%d/%Y')
+        
     @property
     def motivation(self):
 	    if self.grade == 'A':
