@@ -41,7 +41,7 @@ def home():
             return redirect(redirect_url)
         else:
             flash_errors(form)
-    grades = Grade.get_recent(100, Grade.created_at);
+    grades = Grade.get_recent(100, "created_at DESC");
     return render_template("public/home.html", form=form, grades = grades, messages=messages)
 
 @blueprint.route('/logout/')
